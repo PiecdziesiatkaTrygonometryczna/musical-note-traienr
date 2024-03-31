@@ -24,7 +24,7 @@
 
 
     .settings {
-        margin-top: 32vh;
+        margin-top: 45vh;
         width: 100vw;
     }
 
@@ -35,7 +35,8 @@
 
     .notes-to-play {
         position: absolute;
-        top: 60vh;
+        left: 30vw;
+        top: 30vh;
     }
     .frequency-bars {
         height: 0;
