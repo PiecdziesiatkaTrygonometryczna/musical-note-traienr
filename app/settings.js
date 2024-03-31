@@ -43,6 +43,9 @@ function selectAllNaturalNotes() {
 function selectAllNotes() {
     selectNotes(() => true);
 }
+function unselectAllNotes() {
+    selectNotes(() => false);
+}
 
 
 // debugging function to display all of the selected notes. it is called every time the "submit" button is pressed
