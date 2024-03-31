@@ -116,15 +116,6 @@
   bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .meter {
-    width: 100%;
-  }
-
-  .notes {
-    width: 100%;
-  }
-}
 
 .swal-button {
   background: #2c3e50;

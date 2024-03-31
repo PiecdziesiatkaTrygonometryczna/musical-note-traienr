@@ -7,5 +7,5 @@ function displayRandomNote(n) {
         const randomIndex = Math.floor(Math.random() * selectedNotes.length);
         const randomNote = selectedNotes[randomIndex];
         notesToPlayDiv.innerHTML = `<nav>${randomNote}<nav>`;
-    }, n * 1000); // n seconds interval
+    }, n * 5000); // n seconds interval
 }

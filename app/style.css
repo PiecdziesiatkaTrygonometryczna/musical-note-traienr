@@ -1,12 +1,13 @@
 body {
+    background-color: #0f0f0f;
     font-family: sans-serif;
-    color: #2c3e50;
+    color: #f1f1f1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
 body > div {
-    border: solid 1px black;
+    /* border: solid 1px rgb(119, 119, 119); */
 }
 
 .display-notes {

@@ -1,0 +1,41 @@
+@media only screen and (max-width: 768px) {
+
+
+    .note {
+        font-size: 30px;
+    }
+
+    .notes {
+        width: 200px;
+        top: 140px;
+        left: 50px;
+    }
+
+    .meter {
+        left: 90px;
+        top: 40px;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 5vh auto;
+    }
+
+
+
+    .settings {
+        margin-top: 32vh;
+        width: 100vw;
+    }
+
+    .display-notes {
+        /* position: relative; */
+        margin-left: 0;
+    }
+
+    .notes-to-play {
+        position: absolute;
+        top: 60vh;
+    }
+    .frequency-bars {
+        height: 0;
+    }
+}
