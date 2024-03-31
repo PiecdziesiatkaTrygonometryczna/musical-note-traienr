@@ -24,7 +24,7 @@
 
 
     .settings {
-        margin-top: 45vh;
+        margin-top: 300px;
         width: 100vw;
     }
 
@@ -35,10 +35,19 @@
 
     .notes-to-play {
         position: absolute;
-        left: 30vw;
-        top: 30vh;
+        /* left: 30vw; */
+        top: 200px;
     }
     .frequency-bars {
         height: 0;
+    }
+    .current-note {
+        font-size: 70px;
+    }
+    .previous-notes {
+        font-size: 20px;
+    }
+    .next-notes {
+        font-size: 20px;
     }
 }
