@@ -3,35 +3,62 @@ body {
     font-family: sans-serif;
     color: #f1f1f1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
-body > div {
-    /* border: solid 1px rgb(119, 119, 119); */
+body>div {
+    border: solid 1px rgb(119, 119, 119);
 }
 
 .display-notes {
-  margin-left: 500px;
+    margin-left: 500px;
 }
+
 .note-button {
-  background-color: gray;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 5px;
+    background-color: gray;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .note-button.selected {
-  background-color: green;
+    background-color: green;
+}
+
+
+
+#intervalInput {
+    width: 50px;
 }
 
 .notes-to-play {
+    color: grey;
+    grid-column: span 2;
+    font-size: 30px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.current-note {
+    color: rgb(255, 86, 255);
     font-size: 100px;
     text-align: center;
 }
 
-#intervalInput {
-    width: 50px;
+
+.previous-notes {
+    grid-column: span 2;
+    text-align: right;
+}
+
+.next-notes {
+    text-align: left;
+}
+
+.settings {
+    grid-column: span 2;
 }
