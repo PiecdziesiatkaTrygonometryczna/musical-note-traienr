@@ -51,7 +51,9 @@ function generateRandomNotes(interval) {
     generateRandomNote();    //generate one note when pressing the button
 
     displayNotesIntervalId = setInterval(() => {
-        generateRandomNote(); // and then generate it every n seconds interval
+        // Revert color when the interval function is called
+        currentNoteNav.style.color = '';
+        generateRandomNote(); // Generate note every n seconds interval
     }, interval * 1000);
 }
 
@@ -73,8 +75,8 @@ function displayRecentNote(note) {
         recentNotes.shift();
     }
     recentNotes.push(note);
-    console.log("recent" + recentNotes);
-    console.log("next" + nextNotes);
+    // console.log("recent" + recentNotes);
+    // console.log("next" + nextNotes);
 
     const previousNotesNav = document.querySelector('.previous-notes');
     let string = "";
@@ -90,3 +92,16 @@ function displayRecentNote(note) {
 function stopDisplayingNotes() {
     clearInterval(displayNotesIntervalId);
 }
+
+
+// Custom event listening when the playing note is changing
+document.addEventListener('noteChanged', function(event) {
+    const currentNotePlaying = event.detail.currentNotePlaying;
+    const currentNoteNav = document.querySelector('.current-note');
+
+    if (currentNoteNav.innerText.trim() === currentNotePlaying) {
+        currentNoteNav.style.color = 'green'; // Change color of current note div if it matches the current playing note
+    } else {
+        currentNoteNav.style.color = '';
+    }
+});

@@ -79,6 +79,15 @@ Notes.prototype.update = function (note) {
     this.$frequency.childNodes[0].textContent = parseFloat(
       note.frequency
     ).toFixed(1);
+    console.log("Currently played note:", this.$notesMap[note.value].dataset.name);
+
+    // custom event with the currently played note
+    const event = new CustomEvent('noteChanged', {
+      detail: {
+        currentNotePlaying: this.$notesMap[note.value].dataset.name
+      }
+    });
+    document.dispatchEvent(event);
   }
 };
 
