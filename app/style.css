@@ -2,9 +2,26 @@ body {
     font-family: sans-serif;
     color: #2c3e50;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 body > div {
-    /* border: solid 4px black; */
+    border: solid 1px black;
+}
+
+.display-notes {
+  margin-left: 500px;
+}
+.note-button {
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.note-button.selected {
+  background-color: green;
 }

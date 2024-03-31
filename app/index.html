@@ -30,7 +30,7 @@
       <input type="checkbox" checked />
     </label>
 
-    
+
   </div>
 
 
@@ -38,13 +38,44 @@
 
   <div>
     <h1> SIEMA</h1>
-  </div>
+
+
+
+
+
   <div>
-    <h1> SIEMA</h1>
+    <form id="noteForm">
+      <!-- loop to generate button for each note -->
+      <script>
+        const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+        notes.forEach(note => {
+          document.write(`
+              <label>
+                <input type="checkbox" name="note" value="${note}" style="display: none;" />
+                <button type="button" onclick="toggleNote('${note}')" class="note-button" value="${note}">${note}</button>
+              </label>
+            `);
+        });
+      </script>
+    </form>
   </div>
-  <div>
-    <h1> SIEMA</h1>
-  </div>
+
+
+  
+<div>
+  <button onclick="selectAllNaturalNotes()">nat</button>
+  <button onclick="selectAllSharpNotes()">sharp</button>
+  <button onclick="selectAllNotes()">all</button>
+  <button class="display-notes" onclick="displaySelectedNotes()">Submit</button>
+  <div id="selectedNotes"></div>
+</div>
+
+
+
+
+
+
+  <script src="settings.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="https://cdn.jsdelivr.net/npm/aubiojs@0.1.1/build/aubio.min.js"></script>
