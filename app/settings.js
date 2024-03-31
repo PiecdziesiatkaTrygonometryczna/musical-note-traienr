@@ -48,7 +48,7 @@ function unselectAllNotes() {
 }
 
 
-// debugging function to display all of the selected notes. it is called every time the "submit" button is pressed
+// debugging function to display all of the selected notes.
 function displaySelectedNotes() {
     const selectedNotesDiv = document.getElementById('selectedNotes');
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))

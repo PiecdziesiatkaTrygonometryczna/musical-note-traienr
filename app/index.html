@@ -10,8 +10,10 @@
 </head>
 
 <body>
-  <div class="tuner">
 
+
+
+  <div class="tuner">
 
     <canvas class="frequency-bars"></canvas>
     <div class="meter">
@@ -30,20 +32,16 @@
       <input type="checkbox" checked />
     </label>
 
-
   </div>
 
 
 
-
-  <div>
-    <h1> SIEMA</h1>
-
+  <div class="notes-to-play">
+  </div>
 
 
 
-
-  <div>
+  <div class="settings">
     <form id="noteForm">
       <!-- loop to generate button for each note -->
       <script>
@@ -58,25 +56,21 @@
         });
       </script>
     </form>
+
+    <button onclick="selectAllNaturalNotes()">nat</button>
+    <button onclick="selectAllSharpNotes()">sharp</button>
+    <button onclick="selectAllNotes()">all</button>
+    <button onclick="unselectAllNotes()">clear</button>
+    <button class="display-notes" onclick="displayRandomNote(1)">Submit</button>
+    <div id="selectedNotes"></div>
   </div>
-
-
-  
-<div>
-  <button onclick="selectAllNaturalNotes()">nat</button>
-  <button onclick="selectAllSharpNotes()">sharp</button>
-  <button onclick="selectAllNotes()">all</button>
-  <button onclick="unselectAllNotes()">clear</button>
-  <button class="display-notes" onclick="displaySelectedNotes()">Submit</button>
-  <div id="selectedNotes"></div>
-</div>
-
 
 
 
 
 
   <script src="settings.js"></script>
+  <script src="notes-to-play.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="https://cdn.jsdelivr.net/npm/aubiojs@0.1.1/build/aubio.min.js"></script>
