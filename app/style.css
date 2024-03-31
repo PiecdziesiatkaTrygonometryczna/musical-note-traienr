@@ -12,6 +12,8 @@ body>div {
 
 .display-notes {
     margin-left: 500px;
+    height: 30px;
+    width: 70px;
 }
 
 .note-button {
@@ -31,7 +33,9 @@ body>div {
 
 
 #intervalInput {
-    width: 50px;
+    font-size: 15px;
+    height: 25px;
+    width: 70px;
 }
 
 .notes-to-play {
@@ -59,6 +63,7 @@ body>div {
     text-align: left;
 }
 
-.settings {
-    grid-column: span 2;
+.settings .menu {
+    height: 30px;
+    width: 70px;
 }
