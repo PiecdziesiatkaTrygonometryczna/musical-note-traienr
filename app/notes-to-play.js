@@ -1,10 +1,29 @@
 let displayNotesIntervalId;
 let recentNotes = [];
+let nextNotes = [];
 const amountOfRecentNotesToDisplay = 5;
+const amountOfNextNotesToDisplay = 3;
 
+function fillNextNotesArray() {
+    nextNotes = [];
+    const NextNotesNav = document.querySelector('.next-notes');
+    const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))
+        .map(checkbox => checkbox.value);
+    for (let i = 0; i <= amountOfNextNotesToDisplay; i++) {
+        const randomIndex = Math.floor(Math.random() * selectedNotes.length);
+        nextNotes.push(selectedNotes[randomIndex]);
+    }
+    let string = ""
+    for (let i = 0; i < nextNotes.length; i++) {
+        string += nextNotes[i] + " "
+    }
+    NextNotesNav.innerHTML = string;
+
+}
 // function to randomly choose a note from the selected notes array every n seconds
 function generateRandomNotes(interval) {
     stopDisplayingNotes();
+    fillNextNotesArray()
 
 
     const currentNoteNav = document.querySelector('.current-note');
