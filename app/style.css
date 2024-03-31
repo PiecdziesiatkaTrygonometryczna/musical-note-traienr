@@ -7,7 +7,7 @@ body {
 }
 
 body>div {
-    border: solid 1px rgb(119, 119, 119);
+    /* border: solid 1px rgb(119, 119, 119); */
 }
 
 .display-notes {

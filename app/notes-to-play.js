@@ -23,8 +23,9 @@ function fillNextNotesArray() {
 }
 // function to randomly choose a note from the selected notes array every n seconds
 function generateRandomNotes(interval) {
+    recentNotes = [];
     stopDisplayingNotes();
-    fillNextNotesArray()
+    fillNextNotesArray();
 
 
     const currentNoteNav = document.querySelector('.current-note');
