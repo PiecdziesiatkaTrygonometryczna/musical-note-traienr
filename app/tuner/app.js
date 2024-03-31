@@ -32,10 +32,17 @@ Application.prototype.start = function () {
     }
   };
 
-  swal.fire("Welcome to online tuner!").then(function () {
+  swal.fire({
+    title: 'Witaj w Trenerze nut.',
+    showConfirmButton: true,
+    confirmButtonText: 'Rozpocznij',
+    html: '<p>Aplikacja ma na celu pomoc w nauce nut, śpiewu, rozpoznawania dźwięków ze słuchu, położenia dźwięków na różnych instrumentach, oraz wiele innych.</p>' + 
+    '<p>Życzymy owocnej nauki! 😀</p>'
+  }).then(function () {
     self.tuner.init();
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount);
   });
+  
 
   this.$a4.addEventListener("click", function () {
     swal

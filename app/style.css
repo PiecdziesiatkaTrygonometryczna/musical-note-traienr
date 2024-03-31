@@ -31,3 +31,7 @@ body > div {
     font-size: 100px;
     text-align: center;
 }
+
+#intervalInput {
+    width: 50px;
+}

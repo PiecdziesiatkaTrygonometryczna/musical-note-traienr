@@ -44,6 +44,7 @@
 
   <div class="settings">
     <form id="noteForm">
+      <h4>Wybierz nuty do wyświetlania:</h4>
       <!-- loop to generate button for each note -->
       <script>
         const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
@@ -58,11 +59,13 @@
       </script>
     </form>
 
-    <button onclick="selectAllNaturalNotes()">nat</button>
-    <button onclick="selectAllSharpNotes()">sharp</button>
-    <button onclick="selectAllNotes()">all</button>
-    <button onclick="unselectAllNotes()">clear</button>
-    <button class="display-notes" onclick="displayRandomNote(1)">Submit</button>
+    <button onclick="selectAllNotes()">Wszystkie</button>
+    <button onclick="selectAllNaturalNotes()">Całe</button>
+    <button onclick="selectAllSharpNotes()">Krzyżyki</button>
+    <button onclick="unselectAllNotes()">Wyczyść</button>
+    <nav>Interwał (sek): <input id="intervalInput" type="number" step="0.05" min="0.3" max="10.0" value="3.0" placeholder="Interwał (sek)"/></nav>
+    <button class="display-notes" onclick="submitRandomNote()">Start</button>
+    <button class="display-notes" onclick="stopDisplaying()">Stop</button>
     <div id="selectedNotes"></div>
   </div>
 
