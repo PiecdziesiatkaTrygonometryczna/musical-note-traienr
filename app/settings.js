@@ -19,6 +19,7 @@ function toggleNote(note) {
     checkbox.checked = !checkbox.checked;
 
     const checkedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked')).map(input => input.value);
+    console.log(checkedNotes);
 
     // disable the start button if there are less than 2 notes selected
     submitButton.disabled = checkedNotes.length < 2;

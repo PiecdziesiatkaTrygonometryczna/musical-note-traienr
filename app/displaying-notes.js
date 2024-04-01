@@ -1,6 +1,12 @@
+const INVALID_INTERVAL_MESSAGE = "Podaj inerwał od 0,3 do 10";
+const INVALID_NUMBER_MESSAGE = "Podaj liczbę";
 let displayNotesInterval;
+const CURRENT_NOTE_CLASS = 'current-note';
+const NEXT_NOTES_CLASS = 'next-notes';
+const PREVIOUS_NOTES_CLASS = 'previous-notes';
 
 
+// generate a random note within the selected checkboxes
 function generateRandomNote() {
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'), checkbox => checkbox.value);
     const randomIndex = Math.floor(Math.random() * selectedNotes.length);
@@ -8,16 +14,25 @@ function generateRandomNote() {
 }
 
 
-// start displaying notes with an interval
+// start the program with user interval value
 function startProgram() {
     const intervalInput = document.getElementById('intervalInput');
     const interval = parseFloat(intervalInput.value);
-    if (!isNaN(interval) && interval >= 0.3 && interval <= 10.0) {
-        startDisplayingNotes(interval);
+    if (!isNaN(interval)) {
+        if (validateInterval(interval)) {
+            startDisplayingNotes(interval);
+        } else {
+            alert(INVALID_INTERVAL_MESSAGE);
+        }
     } else {
-        alert("Nieprawidłowe dane.");
+        alert(INVALID_NUMBER_MESSAGE);
     }
 }
+
+function validateInterval(interval) {
+    return interval >= 0.3 && interval <= 10.0;
+}
+
 
 // fill the next notes array with 3 random notes
 function initializeNextNotesArray() {
@@ -27,31 +42,27 @@ function initializeNextNotesArray() {
 }
 
 
-// function to randomly display a note from the selected notes array every n seconds
 function startDisplayingNotes(interval) {
     stopDisplayingNotes() // if any notes are being displayed, stop it
-
+    setCurrentNoteNav("");
+    setPreviousNotesNav("");
     initializeNextNotesArray(); // generate initial set of notes
-    swipeAllNotesLeft();
-
-    displayNotesInterval = setInterval(() => {    // repeat every specified interval
-        revertColorOfCurrentNote(); // rever color to default when switching
-        swipeAllNotesLeft();
-    }, interval * 1000);
+    displayNotesInterval = setInterval(() => { revertColorOfCurrentNote(); updateNotesDisplay(); }, interval * 1000);
 }
 
 // helper function to display next note, and move every note 1 place left
-function swipeAllNotesLeft() {
-    nextNotes = getNextNotes();
-    if (getCurrentNote()) { addNoteToPreviousNotes(getCurrentNote()) }// add current note to previous notes array if it exists
+function updateNotesDisplay() {
+    const nextNotes = getNextNotes();
+    const currentNote = getCurrentNote();
+    if (currentNote) { addNoteToPreviousNotes(currentNote) } // add current note to previous notes array if it exists
     setCurrentNoteNav(nextNotes.shift()); // remove the first note from the next notes array and display it as the current note
-    nextNotes.push(generateRandomNote());// add random note as last index of next notes
+    nextNotes.push(generateRandomNote()); // add random note as last index of next notes
     setNextNotesNav(nextNotes.join(" ")); // update next notes nav
 }
 
 // handle adding note to previous notes array
 function addNoteToPreviousNotes(note) {
-    previousNotes = getPreviousNotes();
+    const previousNotes = getPreviousNotes();
     if (previousNotes.length >= 5) { // prevent previous notes from storing more than 5 notes
         previousNotes.shift();
     }
@@ -64,49 +75,35 @@ function stopDisplayingNotes() {
     clearInterval(displayNotesInterval);
 }
 
-const getCurrentNote = () => document.querySelector('.current-note').innerText;
+const getCurrentNote = () => document.querySelector(`.${CURRENT_NOTE_CLASS}`).innerText;
 
 function getNextNotes() {
-    const nextNotesNav = document.querySelector('.next-notes');
+    const nextNotesNav = document.querySelector(`.${NEXT_NOTES_CLASS}`);
     return nextNotesNav.textContent.trim().split(" ");
 }
 
 function getPreviousNotes() {
-    const previousNotesNav = document.querySelector('.previous-notes');
+    const previousNotesNav = document.querySelector(`.${PREVIOUS_NOTES_CLASS}`);
     return previousNotesNav.textContent.trim().split(" ");
 }
 
 
 function setCurrentNoteNav(note) {
-    const currentNoteNav = document.querySelector('.current-note');
+    const currentNoteNav = document.querySelector(`.${CURRENT_NOTE_CLASS}`);
     currentNoteNav.innerHTML = `<nav>${note}</nav>`;
 }
 
 function setNextNotesNav(string) {
-    const nextNotesNav = document.querySelector('.next-notes');
+    const nextNotesNav = document.querySelector(`.${NEXT_NOTES_CLASS}`);
     nextNotesNav.textContent = string;
 }
 
 function setPreviousNotesNav(string) {
-    const previousNotesNav = document.querySelector('.previous-notes');
+    const previousNotesNav = document.querySelector(`.${PREVIOUS_NOTES_CLASS}`);
     previousNotesNav.textContent = string;
 }
 
 function revertColorOfCurrentNote() {
-    const currentNoteNav = document.querySelector('.current-note');
+    const currentNoteNav = document.querySelector(`.${CURRENT_NOTE_CLASS}`);
     currentNoteNav.style.color = '';
 }
-
-// Custom event listening when the playing note is changing
-document.addEventListener('noteChanged', function (event) {
-    const currentNotePlaying = event.detail.currentNotePlaying;
-    const currentNoteNav = document.querySelector('.current-note');
-
-    if (currentNoteNav.textContent.trim() === currentNotePlaying) {
-        currentNoteNav.style.color = 'green'; // Change color of current note div if it matches the current playing note
-    } else {
-        currentNoteNav.style.color = '';
-    }
-});
-
-
