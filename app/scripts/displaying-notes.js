@@ -5,32 +5,36 @@ const CURRENT_NOTE_CLASS = 'current-note';
 const NEXT_NOTES_CLASS = 'next-notes';
 const PREVIOUS_NOTES_CLASS = 'previous-notes';
 
+// if intervalinput is disabled, start displaying without interval
+// else start the program with user interval value
+function startProgram() {
+    const intervalInput = document.getElementById('intervalInput');
+    if (intervalInput.disabled) {
+        startDisplayingNotesWithoutInterval();
+    } else {
+        const interval = parseFloat(intervalInput.value);
+        if (!isNaN(interval)) {
+            if (validateInterval(interval)) {
+                startDisplayingNotes(interval);
+            } else {
+                alert(INVALID_INTERVAL_MESSAGE);
+            }
+        } else {
+            alert(INVALID_NUMBER_MESSAGE);
+        }
+    }
+
+}
+
+function validateInterval(interval) {
+    return interval >= 0.3 && interval <= 10.0;
+}
 
 // generate a random note within the selected checkboxes
 function generateRandomNote() {
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'), checkbox => checkbox.value);
     const randomIndex = Math.floor(Math.random() * selectedNotes.length);
     return selectedNotes[randomIndex];
-}
-
-
-// start the program with user interval value
-function startProgram() {
-    const intervalInput = document.getElementById('intervalInput');
-    const interval = parseFloat(intervalInput.value);
-    if (!isNaN(interval)) {
-        if (validateInterval(interval)) {
-            startDisplayingNotes(interval);
-        } else {
-            alert(INVALID_INTERVAL_MESSAGE);
-        }
-    } else {
-        alert(INVALID_NUMBER_MESSAGE);
-    }
-}
-
-function validateInterval(interval) {
-    return interval >= 0.3 && interval <= 10.0;
 }
 
 
@@ -41,13 +45,21 @@ function initializeNextNotesArray() {
     return nextNotes;
 }
 
-
-function startDisplayingNotes(interval) {
-    stopDisplayingNotes() // if any notes are being displayed, stop it
+function startDisplaying() {
+    stopDisplayingNotes(); // if any notes are being displayed, stop it
     setCurrentNoteNav("");
     setPreviousNotesNav("");
-    initializeNextNotesArray(); // generate initial set of notes
-    displayNotesInterval = setInterval(() => { revertColorOfCurrentNote(); updateNotesDisplay(); }, interval * 1000);
+    initializeNextNotesArray(); // generate initial set of notesF
+}
+
+function startDisplayingNotesWithoutInterval() {
+    startDisplaying();
+    setTimeout(() => updateNotesDisplay(), 1000);
+}
+
+function startDisplayingNotes(interval) {
+    startDisplaying();
+    displayNotesInterval = setInterval(() => updateNotesDisplay(), interval * 1000);
 }
 
 // helper function to display next note, and move every note 1 place left
@@ -56,6 +68,7 @@ function updateNotesDisplay() {
     const currentNote = getCurrentNote();
     if (currentNote) { addNoteToPreviousNotes(currentNote) } // add current note to previous notes array if it exists
     setCurrentNoteNav(nextNotes.shift()); // remove the first note from the next notes array and display it as the current note
+    revertColorOfCurrentNote();
     nextNotes.push(generateRandomNote()); // add random note as last index of next notes
     setNextNotesNav(nextNotes.join(" ")); // update next notes nav
 }

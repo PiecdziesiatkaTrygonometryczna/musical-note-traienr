@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.disabled = true; // disable the submit button by default
 });
 
+// when nointerval is checked, disable intervalinput
+document.getElementById('noInterval').addEventListener('change', function () {
+    document.getElementById('intervalInput').disabled = this.checked;
+});
+
+
 // function to select or unselect a specific note to later display it or not
 function toggleNote(note) {
     const button = document.querySelector(`button[value="${note}"]`);
@@ -11,7 +17,7 @@ function toggleNote(note) {
 
     button.disabled = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
         button.disabled = false;
     }, 100);
 
