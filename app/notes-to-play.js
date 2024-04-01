@@ -99,7 +99,7 @@ document.addEventListener('noteChanged', function(event) {
     const currentNotePlaying = event.detail.currentNotePlaying;
     const currentNoteNav = document.querySelector('.current-note');
 
-    if (currentNoteNav.innerText.trim() === currentNotePlaying) {
+    if (currentNoteNav.textContent.trim() === currentNotePlaying) {
         currentNoteNav.style.color = 'green'; // Change color of current note div if it matches the current playing note
     } else {
         currentNoteNav.style.color = '';
