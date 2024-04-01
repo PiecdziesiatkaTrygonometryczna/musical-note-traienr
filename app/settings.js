@@ -1,7 +1,4 @@
 let submitButton = document.querySelector('.display-notes');
-const intervalInput = document.getElementById('intervalInput');
-const option2Checkbox = document.getElementById('option2');
-option2Checkbox.addEventListener('change', handleOptionChange); // enable / disable certain options
 
 document.addEventListener('DOMContentLoaded', function () {
     submitButton.disabled = true; // disable the submit button by default
@@ -14,7 +11,7 @@ function toggleNote(note) {
 
     button.disabled = true;
 
-    setTimeout(function () {
+    setTimeout(function() {
         button.disabled = false;
     }, 100);
 
@@ -65,9 +62,4 @@ function displaySelectedNotes() {
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))
         .map(checkbox => checkbox.value);
     selectedNotesDiv.textContent = 'Selected notes: ' + selectedNotes.join(', ');
-}
-
-// if option to display a note until it is played is checked, disable the interval option
-function handleOptionChange() {
-    intervalInput.disabled = option2Checkbox.checked;
 }
