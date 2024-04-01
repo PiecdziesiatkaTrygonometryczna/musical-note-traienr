@@ -2,14 +2,14 @@ let displayNotesInterval;
 let previousNotes = [];
 
 
-function getRandomNote() {
+function generateRandomNote() {
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'), checkbox => checkbox.value);
     const randomIndex = Math.floor(Math.random() * selectedNotes.length);
     return selectedNotes[randomIndex];
 }
 
 
-// handle the submit of the interval function
+// start displaying notes with an interval
 function startProgram() {
     const intervalInput = document.getElementById('intervalInput');
     const interval = parseFloat(intervalInput.value);
@@ -20,11 +20,9 @@ function startProgram() {
     }
 }
 
-// fill the next notes array with 3 notes - this function is called only once - when pressing the start button 
+// fill the next notes array with 3 random notes
 function initializeNextNotesArray() {
-    const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'), checkbox => checkbox.value); // notes selected by the user
-    const randomIndexes = Array.from({ length: 3 }, () => Math.floor(Math.random() * selectedNotes.length)); // generate 3 random notes
-    const nextNotes = randomIndexes.map(index => selectedNotes[index]);
+    const nextNotes = Array.from({ length: 3 }, generateRandomNote); 
     updateNextNotesNav(nextNotes.join(" ")); // and also display it in the next-notes nav
     return nextNotes;
 }
@@ -33,9 +31,7 @@ function initializeNextNotesArray() {
 // function to randomly choose a note from the selected notes array every n seconds
 function startDisplayingNotes(interval) {
     stopDisplayingNotes() // if any notes are being displayed, stop it
-
-
-
+    
     let nextNotes = initializeNextNotesArray(); // generate initial set of notes
     swipeAllNotesLeft();
 
@@ -50,7 +46,7 @@ function startDisplayingNotes(interval) {
         const currentNote = nextNotes.shift(); // take (and remove) the first note from the next notes array
         updateCurrentNoteNav(currentNote); // display it as the current note
         addNoteToPreviousNotes(currentNote); // and add it to previous notes array
-        nextNotes.push(getRandomNote());// and add it as the last index of the next notes array
+        nextNotes.push(generateRandomNote());// and add it as the last index of the next notes array
         updateNextNotesNav(nextNotes.join(" "));
     }
 }
