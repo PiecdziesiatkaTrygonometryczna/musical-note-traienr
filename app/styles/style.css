@@ -101,8 +101,22 @@ body {
 }
 
 
+.display-notes:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.display-notes:not(:disabled):hover {
+    background-color: #0056b3;
+}
+
 
 input[disabled] {
     background-color: #a0a0a0;
     color: #000000;
+}
+
+label.custom-checkbox {
+    font-size: 2vh;
 }
