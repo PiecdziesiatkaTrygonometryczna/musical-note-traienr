@@ -6,9 +6,9 @@ body {
     grid-template-columns: repeat(5, 1fr);
 }
 
-body>div {
-    /* border: solid 1px rgb(119, 119, 119); */
-}
+/* body>div {
+    border: solid 1px rgb(119, 119, 119);
+} */
 
 .display-notes {
     margin-left: 500px;
