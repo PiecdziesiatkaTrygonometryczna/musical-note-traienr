@@ -124,12 +124,10 @@ function generateRandomNotesWithoutInterval() {
     stopDisplayingNotes();
     fillNextNotesArray();
 
-
     const currentNoteNav = document.querySelector('.current-note');
     const NextNotesNav = document.querySelector('.next-notes');
     const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))
         .map(checkbox => checkbox.value);
-
 
     function generateRandomNote() {
         const randomNote = nextNotes.shift();
@@ -137,42 +135,48 @@ function generateRandomNotesWithoutInterval() {
         nextNotes.push(selectedNotes[randomIndex]);
         displayRecentNote(randomNote);
         currentNoteNav.innerHTML = `<nav>${randomNote}<nav>`;
-        let string = ""
+        let string = "";
         for (let i = 0; i < nextNotes.length; i++) {
-            string += nextNotes[i] + " "
+            string += nextNotes[i] + " ";
         }
         NextNotesNav.innerHTML = string;
     }
 
-
     generateRandomNote(); // Generate one note when pressing the button
     flagToDisplayNotes = true;
 
-    function checkNoteMatch() {
+    // Define a flag to check if a note was played correctly
+    let notePlayedCorrectly = false;
 
+    // Define the event listener function separately
+    function handleNoteChanged(event) {
+        const currentNotePlaying = event.detail.currentNotePlaying;
 
+        if (currentNoteNav.textContent.trim() === currentNotePlaying) {
+            currentNoteNav.style.color = 'green'; // Change color of current note div if it matches the current playing note
+            console.log("git bez intrwala");
 
-        // Custom event listening when the playing note is changing
-        document.addEventListener('noteChanged', function (event) {
-            const currentNotePlaying = event.detail.currentNotePlaying;
-            const currentNoteNav = document.querySelector('.current-note');
+            // Set the flag to indicate that the note was played correctly
+            notePlayedCorrectly = true;
 
-            if (currentNoteNav.textContent.trim() === currentNotePlaying) {
-                currentNoteNav.style.color = 'green'; // Change color of current note div if it matches the current playing note
-                console.log("git bez intrwala")
-                setTimeout(function () {
+            setTimeout(function () {
+                // Check if the note was played correctly before progressing to the next note
+                if (notePlayedCorrectly) {
                     generateRandomNote();
-                    element.removeEventListener(event, listenerFunction);
-                    checkNoteMatch(); // Call the function again to check for the next note match
-                }, 1000);
-            } else {
-                currentNoteNav.style.color = '';
-            }
-        });
-
+                    currentNoteNav.style.color = ''; // Change color of current note div if it matches the current playing note
+                    // Reset the flag after progressing to the next note
+                    notePlayedCorrectly = false;
+                }
+            }, 1000);
+        } else {
+            currentNoteNav.style.color = '';
+        }
     }
 
-    checkNoteMatch(); // Start checking for note match
+    // Add the event listener
+    document.addEventListener('noteChanged', handleNoteChanged);
 
-
+    // Later in your code, when you want to remove the event listener
+    // document.removeEventListener('noteChanged', handleNoteChanged);
 }
+
