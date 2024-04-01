@@ -52,6 +52,9 @@ body {
     font-size: 15px;
     height: 25px;
     width: 70px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
 }
 
 .notes-to-play {
@@ -80,12 +83,26 @@ body {
     text-align: left;
 }
 
-.settings .menu {
+.settings .menu,
+.display-notes {
     height: 30px;
     width: 40%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.settings .display-notes {
-    height: 30px;
-    width: 40%;
+.menu:hover,
+.display-notes:hover {
+    background-color: #0056b3;
+}
+
+
+
+input[disabled] {
+    background-color: #a0a0a0;
+    color: #000000;
 }

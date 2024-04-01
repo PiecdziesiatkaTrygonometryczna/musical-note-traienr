@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="tuner/style.css" />
   <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/dark-mode.css" />
+  <link rel="stylesheet" href="styles/checkbox.css" />
   <link href="styles/mobile-style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link
@@ -72,8 +73,9 @@
     <button class="menu" onclick="unselectAllNotes()">Wyczyść</button>
     <nav>Interwał (sek): <input id="intervalInput" type="number" step="0.05" min="0.3" max="10.0" value="3.0"
         placeholder="Interwał (sek)" /></nav>
-    <label for="noInterval">
+    <label class="custom-checkbox" for="noInterval">
       <input type="checkbox" id="noInterval"> Zmień dźwięk po zagraniu dobrze
+      <span class="checkmark"></span>
     </label>
     <button class="display-notes" onclick="startProgram()">Start</button>
     <button class="display-notes" onclick="stopDisplayingNotes()">Stop</button>
