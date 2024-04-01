@@ -1,5 +1,3 @@
-
-
 .note {
   font-size: 70px;
   font-weight: bold;
@@ -18,11 +16,10 @@
   overflow: -moz-scrollbars-none;
   white-space: nowrap;
   -ms-overflow-style: none;
-  -webkit-mask-image: -webkit-linear-gradient(left,
-      rgba(255, 255, 255, 0),
-      #fff,
-      rgba(255, 255, 255, 0));
+  mask-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
 }
+
+
 
 .notes-list::-webkit-scrollbar {
   display: none;
@@ -64,6 +61,7 @@
   top: 250px;
   text-align: center;
 }
+
 .meter {
   position: fixed;
   left: 50px;
