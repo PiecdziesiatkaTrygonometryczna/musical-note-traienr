@@ -1,16 +1,25 @@
 @media only screen and (max-width: 768px) {
 
+    body {
+        display: inline;
+    }
 
     .note {
-        font-size: 30px;
-        padding-right: 10px;
-        padding-left: 10px;
+        font-size: 15vw;
+        padding-right: 5vw;
+        padding-left: 1vw;
     }
 
     .notes {
-        width: 150px;
-        top: 140px;
-        left: 65px;
+        position: absolute;
+        width: 50vw;
+        top: 130px;
+        left: 50px;
+    }
+
+
+    .notes div+div {
+        margin-top: -10px;
     }
 
     .meter {
@@ -21,33 +30,40 @@
         margin: 0 auto 5vh auto;
     }
 
+    .frequency {
+        font-size: 5vw;
+        top: 200px;
+    }
 
 
     .settings {
-        margin-top: 250px;
+        margin-top: 0;
         width: 100vw;
     }
 
     .display-notes {
-        /* position: relative; */
+        position: relative;
         margin-left: 0;
     }
 
     .notes-to-play {
-        position: absolute;
-        /* left: 30vw; */
-        top: 200px;
+        width: 100vw;
+        margin-top: 190px;
     }
+
     .frequency-bars {
         height: 0;
     }
+
     .current-note {
-        font-size: 70px;
+        font-size: 20vw;
     }
+
     .previous-notes {
-        font-size: 20px;
+        font-size: 7vw;
     }
+
     .next-notes {
-        font-size: 20px;
+        font-size: 6vw;
     }
 }

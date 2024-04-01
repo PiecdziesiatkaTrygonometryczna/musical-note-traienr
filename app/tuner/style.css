@@ -16,7 +16,7 @@
   overflow: -moz-scrollbars-none;
   white-space: nowrap;
   -ms-overflow-style: none;
-  mask-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+  mask-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));  
 }
 
 
@@ -61,6 +61,7 @@
   top: 250px;
   text-align: center;
 }
+
 
 .meter {
   position: fixed;
