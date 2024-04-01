@@ -1,5 +1,4 @@
 let displayNotesInterval;
-let previousNotes = [];
 
 
 function generateRandomNote() {
@@ -22,64 +21,75 @@ function startProgram() {
 
 // fill the next notes array with 3 random notes
 function initializeNextNotesArray() {
-    const nextNotes = Array.from({ length: 3 }, generateRandomNote); 
-    updateNextNotesNav(nextNotes.join(" ")); // and also display it in the next-notes nav
+    const nextNotes = Array.from({ length: 3 }, generateRandomNote);
+    setNextNotesNav(nextNotes.join(" ")); // and also display it in the next-notes nav
     return nextNotes;
 }
 
 
-// function to randomly choose a note from the selected notes array every n seconds
+// function to randomly display a note from the selected notes array every n seconds
 function startDisplayingNotes(interval) {
     stopDisplayingNotes() // if any notes are being displayed, stop it
-    
-    let nextNotes = initializeNextNotesArray(); // generate initial set of notes
+
+    initializeNextNotesArray(); // generate initial set of notes
     swipeAllNotesLeft();
 
-    // repeat every specified interval
-    displayNotesInterval = setInterval(() => {
-        revertColorOfCurrentNote();
+    displayNotesInterval = setInterval(() => {    // repeat every specified interval
+        revertColorOfCurrentNote(); // rever color to default when switching
         swipeAllNotesLeft();
     }, interval * 1000);
+}
 
-    // helper function to display next note, and move every note 1 place left
-    function swipeAllNotesLeft() {
-        const currentNote = nextNotes.shift(); // take (and remove) the first note from the next notes array
-        updateCurrentNoteNav(currentNote); // display it as the current note
-        addNoteToPreviousNotes(currentNote); // and add it to previous notes array
-        nextNotes.push(generateRandomNote());// and add it as the last index of the next notes array
-        updateNextNotesNav(nextNotes.join(" "));
-    }
+// helper function to display next note, and move every note 1 place left
+function swipeAllNotesLeft() {
+    nextNotes = getNextNotes();
+    if (getCurrentNote()) { addNoteToPreviousNotes(getCurrentNote()) }// add current note to previous notes array if it exists
+    setCurrentNoteNav(nextNotes.shift()); // remove the first note from the next notes array and display it as the current note
+    nextNotes.push(generateRandomNote());// add random note as last index of next notes
+    setNextNotesNav(nextNotes.join(" ")); // update next notes nav
 }
 
 // handle adding note to previous notes array
 function addNoteToPreviousNotes(note) {
-    if (previousNotes.length > 5) { // prevent previous notes from storing more than 5 notes
+    previousNotes = getPreviousNotes();
+    if (previousNotes.length >= 5) { // prevent previous notes from storing more than 5 notes
         previousNotes.shift();
     }
     previousNotes.push(note);
-    const previousNotesNav = document.querySelector('.previous-notes');
-    let string = "";
+    setPreviousNotesNav(previousNotes.join(" "));
 
-    for (let i = 0; i < previousNotes.length - 1; i++) { // convert all elements of the array to single string
-        string += previousNotes[i] + " "
-    }
-    previousNotesNav.innerHTML = string; // display all notes in the previous-notes nav
 }
 
-
-// function to stop displaying the notes
 function stopDisplayingNotes() {
     clearInterval(displayNotesInterval);
 }
 
-function updateCurrentNoteNav(note) {
+const getCurrentNote = () => document.querySelector('.current-note').innerText;
+
+function getNextNotes() {
+    const nextNotesNav = document.querySelector('.next-notes');
+    return nextNotesNav.textContent.trim().split(" ");
+}
+
+function getPreviousNotes() {
+    const previousNotesNav = document.querySelector('.previous-notes');
+    return previousNotesNav.textContent.trim().split(" ");
+}
+
+
+function setCurrentNoteNav(note) {
     const currentNoteNav = document.querySelector('.current-note');
     currentNoteNav.innerHTML = `<nav>${note}</nav>`;
 }
 
-function updateNextNotesNav(string) {
+function setNextNotesNav(string) {
     const nextNotesNav = document.querySelector('.next-notes');
     nextNotesNav.textContent = string;
+}
+
+function setPreviousNotesNav(string) {
+    const previousNotesNav = document.querySelector('.previous-notes');
+    previousNotesNav.textContent = string;
 }
 
 function revertColorOfCurrentNote() {
