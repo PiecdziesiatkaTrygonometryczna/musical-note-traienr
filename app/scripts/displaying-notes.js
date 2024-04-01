@@ -1,6 +1,8 @@
 const INVALID_INTERVAL_MESSAGE = "Podaj inerwał od 0,3 do 10";
 const INVALID_NUMBER_MESSAGE = "Podaj liczbę";
 let displayNotesInterval;
+let withoutInterval = false;
+let withInterval = false;
 const CURRENT_NOTE_CLASS = 'current-note';
 const NEXT_NOTES_CLASS = 'next-notes';
 const PREVIOUS_NOTES_CLASS = 'previous-notes';
@@ -49,16 +51,20 @@ function startDisplaying() {
     stopDisplayingNotes(); // if any notes are being displayed, stop it
     setCurrentNoteNav("");
     setPreviousNotesNav("");
-    initializeNextNotesArray(); // generate initial set of notesF
+    initializeNextNotesArray(); // generate initial set of notes
 }
 
 function startDisplayingNotesWithoutInterval() {
     startDisplaying();
+    withInterval = false;
+    withoutInterval = true;
     setTimeout(() => updateNotesDisplay(), 1000);
 }
 
 function startDisplayingNotes(interval) {
     startDisplaying();
+    withInterval = true;
+    withoutInterval = false;
     displayNotesInterval = setInterval(() => updateNotesDisplay(), interval * 1000);
 }
 
@@ -85,6 +91,8 @@ function addNoteToPreviousNotes(note) {
 }
 
 function stopDisplayingNotes() {
+    withoutInterval = false;
+    withInterval = false;
     clearInterval(displayNotesInterval);
 }
 

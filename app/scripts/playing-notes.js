@@ -7,11 +7,11 @@ document.addEventListener('noteChanged', function (event) {
         console.log(currentNotePlaying);
 
         if (currentNoteNav.textContent.trim() === currentNotePlaying) {
-            pause = true;
             console.log("dobrze");
             currentNoteNav.style.color = 'green';
-            setTimeout(() => { updateNotesDisplay(); pause = false; }, 1000);
-
+            console.log(withoutInterval);
+            if (withoutInterval) { pause = true; setTimeout(() => { updateNotesDisplay(); pause = false; }, 1000); }
+            else if (!withInterval) { setTimeout(() => revertColorOfCurrentNote(), 1000); }
         }
     }
 }

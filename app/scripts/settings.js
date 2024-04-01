@@ -61,12 +61,3 @@ function selectAllNotes() {
 function unselectAllNotes() {
     selectNotes(() => false);
 }
-
-
-// debugging function to display all of the selected notes.
-function displaySelectedNotes() {
-    const selectedNotesDiv = document.getElementById('selectedNotes');
-    const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))
-        .map(checkbox => checkbox.value);
-    selectedNotesDiv.textContent = 'Selected notes: ' + selectedNotes.join(', ');
-}
