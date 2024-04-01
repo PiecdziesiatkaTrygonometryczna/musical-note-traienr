@@ -1,7 +1,9 @@
-*{font-family: "Chakra Petch", sans-serif;}
+* {
+    font-family: "Chakra Petch", sans-serif;
+}
 
 body {
-    background-color: #ffffef;  
+    background-color: #ffffef;
     color: #0f0f0f;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -15,26 +17,36 @@ body {
 } */
 
 .display-notes {
-    margin-left: 500px;
+    /* margin-left: 500px; */
     height: 30px;
     width: 70px;
 }
 
 .note-button {
     background-color: gray;
-    border: none;
-    color: white;
+    color: #fff;
     padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .note-button.selected {
-    background-color: green;
+    background-color: #28a745;
 }
 
 
+.settings {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
 
 #intervalInput {
     font-size: 15px;
@@ -70,5 +82,10 @@ body {
 
 .settings .menu {
     height: 30px;
-    width: 70px;
+    width: 40%;
+}
+
+.settings .display-notes {
+    height: 30px;
+    width: 40%;
 }

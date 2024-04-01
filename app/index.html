@@ -72,8 +72,9 @@
     <button class="menu" onclick="unselectAllNotes()">Wyczyść</button>
     <nav>Interwał (sek): <input id="intervalInput" type="number" step="0.05" min="0.3" max="10.0" value="3.0"
         placeholder="Interwał (sek)" /></nav>
-    <input type="checkbox" id="noInterval">
-    <label for="noInterval">Zmień dźwięk po zagraniu dobrze</label>
+    <label for="noInterval">
+      <input type="checkbox" id="noInterval"> Zmień dźwięk po zagraniu dobrze
+    </label>
     <button class="display-notes" onclick="startProgram()">Start</button>
     <button class="display-notes" onclick="stopDisplayingNotes()">Stop</button>
     <button id="mode-toggle"><i id="mode-icon" class="fas fa-sun"></i></button>
