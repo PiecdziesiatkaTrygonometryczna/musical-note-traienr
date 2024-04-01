@@ -1,6 +1,5 @@
 let displayNotesIntervalId;
-let recentNotes = [];
-const amountOfRecentNotesToDisplay = 5;
+let previousNotes = [];
 
 // fill the next notes array with 3 notes - this function is only called once - when pressing the start button
 function makeNextNotesArray() {
@@ -15,67 +14,75 @@ function makeNextNotesArray() {
 
 
 // function to randomly choose a note from the selected notes array every n seconds
-function generateRandomNotes(interval) {
-    recentNotes = [];
-    stopDisplayingNotes();
-    let nextNotes = makeNextNotesArray();
-
-
-    const currentNoteNav = document.querySelector('.current-note');
-    const NextNotesNav = document.querySelector('.next-notes');
-    const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'))
-        .map(checkbox => checkbox.value);
-
-
+function startDisplayingNotes(interval) {
+    // Helper function to generate a random note
     function generateRandomNote() {
-        const randomNote = nextNotes.shift();
-        const randomIndex = Math.floor(Math.random() * selectedNotes.length);
+        const randomNote = nextNotes.shift(); // take the first note of the next notes and display it as the current one
+        addNoteToPreviousNotes(randomNote);
+
+        const randomIndex = Math.floor(Math.random() * selectedNotes.length);// and generate a new note at the end of the next notes
         nextNotes.push(selectedNotes[randomIndex]);
-        displayRecentNote(randomNote);
-        currentNoteNav.innerHTML = `<nav>${randomNote}<nav>`;
-        let string = ""
-        for (let i = 0; i < nextNotes.length; i++) {
-            string += nextNotes[i] + " "
-        }
-        NextNotesNav.innerHTML = string;
+
+        updateNextNotesNav();
+        updateCurrentNoteNav(randomNote);
     }
 
+    // Initialize variables
+    stopDisplayingNotes();
 
-    generateRandomNote();    //generate one note when pressing the button
+    // DOM elements
+    const currentNoteNav = document.querySelector('.current-note');
+    const nextNotesNav = document.querySelector('.next-notes');
 
+    // Get selected notes
+    const selectedNotes = Array.from(document.querySelectorAll('input[name="note"]:checked'), checkbox => checkbox.value);
+
+    // Generate initial set of notes
+    let nextNotes = makeNextNotesArray();
+    generateRandomNote();
+
+    // Generate notes at the specified interval
     displayNotesIntervalId = setInterval(() => {
-        // Revert color when the interval function is called
-        currentNoteNav.style.color = '';
-        generateRandomNote(); // Generate note every n seconds interval
+        currentNoteNav.style.color = ''; // Revert color
+        generateRandomNote();
     }, interval * 1000);
+
+    // Helper function to update next notes display
+    function updateNextNotesNav() {
+        nextNotesNav.textContent = nextNotes.join(" ");
+    }
+
+    function updateCurrentNoteNav(note) {
+        currentNoteNav.innerHTML = `<nav>${note}</nav>`;
+    }
 }
 
 
 // handle the submit of the interval function
-function startDisplayingNotes() {
+function startProgram() {
     const intervalInput = document.getElementById('intervalInput');
     const interval = parseFloat(intervalInput.value);
     if (!isNaN(interval) && interval >= 0.3 && interval <= 10.0) {
-        generateRandomNotes(interval);
+        startDisplayingNotes(interval);
     } else {
         alert("Nieprawidłowe dane.");
     }
 }
 
 // handle displaying previous notes
-function displayRecentNote(note) {
-    if (recentNotes.length > amountOfRecentNotesToDisplay) {
-        recentNotes.shift();
+function addNoteToPreviousNotes(note) {
+    if (previousNotes.length > 5) {
+        previousNotes.shift();
     }
-    recentNotes.push(note);
-    // console.log("recent" + recentNotes);
+    previousNotes.push(note);
+    // console.log("previous" + previousNotes);
     // console.log("next" + nextNotes);
 
     const previousNotesNav = document.querySelector('.previous-notes');
     let string = "";
 
-    for (let i = 0; i < recentNotes.length - 1; i++) {
-        string += recentNotes[i] + " "
+    for (let i = 0; i < previousNotes.length - 1; i++) {
+        string += previousNotes[i] + " "
     }
     previousNotesNav.innerHTML = string;
 }
