@@ -7,7 +7,9 @@
   <title>Trener nut</title>
   <link rel="stylesheet" href="tuner/style.css" />
   <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/dark-mode.css" />
   <link href="styles/mobile-style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -32,7 +34,6 @@
       Auto
       <input type="checkbox" checked />
     </label>
-
   </div>
 
 
@@ -72,6 +73,7 @@
     <label for="noInterval">Zmień dźwięk po zagraniu dobrze</label>
     <button class="display-notes" onclick="startProgram()">Start</button>
     <button class="display-notes" onclick="stopDisplayingNotes()">Stop</button>
+    <button id="mode-toggle"><i id="mode-icon" class="fas fa-moon"></i></button>
   </div>
 
 
@@ -89,6 +91,7 @@
   <script src="tuner/frequency-bars.js"></script>
   <script src="tuner/notes.js"></script>
   <script src="tuner/app.js"></script>
+  <script src="styles/dark-mode.js"></script>
 </body>
 
 </html>
